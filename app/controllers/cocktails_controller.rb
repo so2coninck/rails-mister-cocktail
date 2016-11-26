@@ -3,7 +3,7 @@
 
 
   def index
-    @cocktails = Cocktail.all.order(:name)
+    @cocktails = Cocktail.all
   end
 
   def show
@@ -52,4 +52,3 @@ private
     @cocktail = Cocktail.find(params[:id])
   end
 end
-

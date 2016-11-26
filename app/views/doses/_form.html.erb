@@ -1,0 +1,5 @@
+Create a dose
+<%= simple_form_for @dose, url: cocktail_doses_path do |f| %> <%= f.error_notification %>
+<%= f.association :ingredient %> <%= f.input :description, placeholder: "Quantity"%>
+<%= f.button :submit %>
+<% end %>

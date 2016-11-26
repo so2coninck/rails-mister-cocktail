@@ -1,34 +1,25 @@
-<div class="text-center">
-  <h1><%= @cocktail.name %></h1>
+<h1>cocktail :</h1>
+<%= @cocktail.name %>
 
-  <p><h3>Ingredients</h3></p>
-  <% @cocktail.doses.each do |dose| %>
-    <ul class="list-unstyled">
-      <li>
-        <%= dose.ingredient.name %> (<%= dose.description %>)
-      </li>
-    </ul>
-  <% end %>
 
-  <%= simple_form_for [@cocktail, @dose] do |f| %>
+<ul>
+<% @cocktail.doses.each do |dose| %>
+<li><%= dose.ingredient.name %> - <%= dose.description %>
+<%= link_to "Delete", dose_path(dose),
+method: :delete, class: "btn btn-danger"%></li>
+<% end %>
 
-    <% if @dose.errors.any? %>
-      <div class="alert alert-danger" role="alert" style="color:darkred">
-        <% @dose.errors.full_messages.each do |message| %>
-          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-          <span class="sr-only">Error:</span>
-          <%= message.html_safe %><br>
-        <% end %>
-      </div>
-    <% end %>
+</ul>
 
-    <%= f.input :description, placeholder: "12 leaves, 25 cl, ..." %>
-    <%= f.input :ingredient_id, collection: Ingredient.all, prompt: "Choose an ingredient!" %>
-    <%= f.button :submit, "Add ingredient" , class: "btn btn-primary" %>
-  <% end %>
+<%= link_to 'Back', cocktails_path, class: "btn btn-primary" %>
 
-  <%= cl_image_tag @cocktail.photo.url(:standard), :class => "margin10" %>
-  <br>
-  <%= link_to 'Back', cocktails_path %>
-</div>
+<%= link_to 'Add a dose', new_cocktail_dose_path(@cocktail), class: "btn btn-primary" %>
 
+
+<% content_for(:after_js) do %>
+<script>
+  $(document).ready(function(){
+    alert("<%= @cocktail.name %>");
+  })
+</script>
+<% end %>
