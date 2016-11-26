@@ -1,4 +1,11 @@
 class Dose < ApplicationRecord
-  belongs_to :cocktails
-  belongs_to :ingredients
+belongs_to :cocktail
+belongs_to :ingredient
+
+validates :description, :cocktail, :ingredient, presence: true
+validates_uniqueness_of :cocktail_id, :scope => [:ingredient_id]
+
+ # :message => "error: that ingredient is already in the cocktail!<br>" \
+ #                 "Choose another ingredient or click 'Back' to return " \
+ #              "to the cocktails list."
 end

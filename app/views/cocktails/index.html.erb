@@ -1,0 +1,28 @@
+<h1 class="text-center">Cocktails</h1>
+<%= link_to 'Add new!', new_cocktail_path, :class=>"btn btn-primary btn-lg center" %>
+
+<div class="container">
+  <div class="row">
+    <% @cocktails.each do |cocktail| %>
+      <div class="col-xs-12 col-sm-6 col-md-4" class="cocktail-div">
+        <h3 class="text-center"><%= cocktail.name %></h3>
+        <% if !cocktail.photo.nil? %>
+          <%= link_to cocktail do %>
+            <%= cl_image_tag cocktail.photo.url(:standard) %>
+          <% end %>
+        <% end %>
+        <div class="text-center">
+          <%= link_to 'Edit', edit_cocktail_path(cocktail.id), :class=>"minilink" %>
+          <%= link_to "Delete", cocktail, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"minilink red"%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
